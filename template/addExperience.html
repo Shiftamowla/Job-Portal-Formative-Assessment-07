@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+    
+<!DOCTYPE html>
+<html>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #5d5da3;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #5d5da3;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+<body>
+
+<h3>Add Experience</h3>
+
+<div>
+  <form action="{% url 'addExp' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+
+
+    <label> Experience Name </label>
+    <select id="exp_id" name="exp_id">
+          
+       <option value="" disabled selected>Select Experience</option>
+       {% for i in exp %}
+
+       <option value="{{i.id}}">{{i.title}}</option>
+       {% endfor %}
+    </select>
+
+
+
+  
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
+
+
+{% endblock body %}

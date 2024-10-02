@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4; /* Light gray background */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff; /* White background for the container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #5d5da3; /* Accent color */
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-info img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .profile-info h3 {
+            margin: 10px 0;
+            color: #333; /* Dark text */
+        }
+
+        .profile-info p {
+            color: #555; /* Medium gray text */
+            margin: 5px 0;
+        }
+
+        .job-post {
+            border: 1px solid #ddd; /* Light gray border */
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #f7f7f7; /* Slightly darker gray background */
+            transition: box-shadow 0.3s;
+        }
+
+        .job-post:hover {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .job-title {
+            font-size: 1.8em;
+            color: #333; /* Dark text */
+            margin: 0;
+            text-align: center;
+        }
+
+        .company, .location, .salary, .posted-date, .application-deadline {
+            color: #555; /* Medium gray text */
+            margin: 8px 0;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .description {
+            margin-top: 10px;
+            color: #444; /* Darker gray text */
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .apply-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            background-color: #5d5da3; /* Accent color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .apply-button:hover {
+            background-color: #E6E6FA; /* Light lavender on hover */
+            color: #333; /* Dark text on hover */
+        }
+    </style>
+</head>
+
+<body>
+<h2>Job List</h2>
+
+{% for i in Job %}
+<div class="job-post">
+    <h2 class="job-title">{{ i.job_title }} {{i.id}}</h2>
+    <div class="logo">
+        <img src="/{{ i.company_logo }}" alt="Company Logo">
+    </div>
+    <div class="company">Company Title: <strong>{{ i.company_name }}</strong></div>
+    <div class="location">Company Location: <strong>{{ i.location }}</strong></div>
+    <div class="description">Company Description: <strong>{{ i.description }}</strong></div>
+    <div class="description">Qualifications: <strong>{{ i.Qualifications }}</strong></div>
+    <div class="salary">Salary: <strong>{{ i.salary }}</strong></div>
+    <div class="application-deadline">Deadline: <strong>{{ i.application_deadline }}</strong></div>
+    <div class="user">Posted By: <strong>{{ i.user.first_name }} {{ i.user.last_name }}</strong></div>
+
+    {% if user.user_type == 'jobseeker' %}
+    <a href="{% url 'apply' job.id %}" class="apply-button">Apply Now</a>
+    {% endif %}
+
+
+    {% if request.user.user_type == 'recruiter' %}
+
+    <a href="{% url 'deletejob' i.id %}" class="apply-button">Delete Job</a>
+    <a href="{% url 'editjob' i.id %}" class="apply-button">Edit Job</a>
+    <a href="{% url 'mainprofile' i.id %}" class="apply-button">View Job</a>
+    {% endif %}
+</div>
+{% endfor %}
+
+</body>
+</html>
+
+{% endblock body %}

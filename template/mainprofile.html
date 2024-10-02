@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .profile-header {
+            text-align: center;
+        }
+
+        .company-logo {
+            width: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .company-name {
+            font-weight: bold;
+        }
+
+        .posted-on {
+            color: #777;
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        h2 {
+            color: #0056b3;
+        }
+
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+
+        .apply-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #004494;
+        }
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% for i in Job %}
+        <header class="profile-header">
+            <img src="/{{ i.company_logo }}" alt="Company Logo" class="company-logo">
+            <h1>{{ i.position }}</h1>
+            <p class="company-name">{{ i.job_title }}</p>
+        </header>
+        
+        <section class="company-info">
+            <h2>Company Information</h2>
+            <p><strong>Company Type:</strong> {{ i.company_name }}</p>
+        </section>
+        
+        <section class="job-description">
+            <h2>Job Description</h2>
+            <p>{{ i.description }}</p>
+        </section>
+        
+        <section class="job-details">
+            <h2>Job Details</h2>
+            <p><strong>Salary:</strong> {{ i.salary }}</p>
+            <p><strong>Deadline:</strong> {{ i.application_deadline }}</p>
+        </section>
+        
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock body %}

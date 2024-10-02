@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(0, 157, 255);
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<h3>Skill List</h3>
+
+
+
+<table id="customers">
+  <tr>
+    <th>Job Title</th>
+    <th>Company Name</th>
+    <th>Salary</th>
+    <th>Action</th>
+ </tr>
+  
+  {% for i in myjob %}
+    
+
+    
+  <tr>
+    <td>{{i.job_title}}</td>
+    <td>{{i.company_name}}</td>
+    <td>{{i.salary}}</td>
+    <td>
+       <a href="{% url 'jobdeletepage' i.id %}">Delete</a>
+    </td>
+  {% endfor %}
+
+</table>
+
+</body>
+</html>
+
+{% endblock body %}
