@@ -9,10 +9,31 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.db.models import Q 
 
 
 def base(req):
     return render(req, 'base.html')
+
+def searchJob(request):
+    
+    query = request.GET.get('query')
+    
+    if query:
+        
+        data = JobModel.objects.filter(Q(job_title__icontains=query) 
+                                       |Q(company_name__icontains=query) 
+                                       |Q(salary__icontains=query))
+    
+    else:
+        data = JobModel.objects.none()
+        
+    context={
+        'data':data,
+        'query':query
+    }
+    
+    return render(request,"search.html",context)
 
 def changepassword(req):
     current_user=req.user

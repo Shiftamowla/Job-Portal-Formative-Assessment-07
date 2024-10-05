@@ -9,6 +9,7 @@ urlpatterns = [
     path('base/', base, name='base'),
     path('profilepage/', profilepage, name='profilepage'),
     path('createdjob/', createdjob, name='createdjob'),
+    path('searchJob/', searchJob, name='searchJob'),
     path('mainprofile/<int:id>', mainprofile, name='mainprofile'),
     path('deletejob/<int:id>', deletejob, name='deletejob'),
     path('deleteedu/<int:id>', deleteedu, name='deleteedu'),
